@@ -14,13 +14,12 @@ public class StringSchema {
     public StringSchema() {
     }
 
-    public StringSchema contains(String contStr) {
-        this.patternString = contStr;
-        return this;
-    }
-
     public StringSchema required() {
         this.availableChecking = true;
+        return this;
+    }
+    public StringSchema contains(String contStr) {
+        this.patternString = contStr;
         return this;
     }
 
