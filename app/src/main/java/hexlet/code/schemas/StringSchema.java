@@ -1,6 +1,6 @@
 package hexlet.code.schemas;
 
-public class StringSchema {
+public class StringSchema extends BaseSchema {
 
     //
     private boolean availableChecking = false;
@@ -11,8 +11,6 @@ public class StringSchema {
 
     private Integer minimumStringLength = 0;
 
-    public StringSchema() {
-    }
 
     public StringSchema required() {
         this.availableChecking = true;

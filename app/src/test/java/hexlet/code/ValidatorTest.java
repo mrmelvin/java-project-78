@@ -1,8 +1,13 @@
 package hexlet.code;
 
+import hexlet.code.schemas.MapSchema;
 import hexlet.code.schemas.NumberSchema;
 import hexlet.code.schemas.StringSchema;
 import org.junit.jupiter.api.Test;
+
+import java.util.HashMap;
+import java.util.Map;
+
 import static org.assertj.core.api.Assertions.assertThat;
 
 class ValidatorTest {
@@ -46,5 +51,35 @@ class ValidatorTest {
         schema4.range(0, 10);
         assertThat(schema4.isValid(8)).isTrue();
         assertThat(schema4.isValid(11)).isFalse();
+    }
+
+    @Test
+    void testMapWithoutRequired() throws Exception {
+        Validator v5 = new Validator();
+        MapSchema schema5 = v5.map();
+        assertThat(schema5.isValid(null)).isTrue();
+        assertThat(schema5.isValid("String")).isTrue();
+        assertThat(schema5.isValid(new HashMap<>())).isTrue();
+        assertThat(schema5.isValid(new HashMap<>(Map.of("foo", "bar")))).isTrue();
+    }
+
+    @Test
+    void testMapWithRequired() throws Exception {
+        Validator v6 = new Validator();
+        MapSchema schema6 = v6.map();
+        schema6.required();
+        assertThat(schema6.isValid("String")).isFalse();
+        assertThat(schema6.isValid(new HashMap<>())).isTrue();
+    }
+
+    @Test
+    void testMapWithSize() throws Exception {
+        Validator v6 = new Validator();
+        MapSchema schema6 = v6.map();
+        schema6.required();
+        schema6.sizeof(2);
+        assertThat(schema6.isValid(new HashMap<>())).isFalse();
+        Map<String, String> tempMap = new HashMap<>(Map.of("foo", "bar", "lorem", "ipsum"));
+        assertThat(schema6.isValid(tempMap)).isTrue();
     }
 }
