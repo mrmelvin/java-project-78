@@ -4,11 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Predicate;
 
-public class BaseSchema {
+public abstract class BaseSchema {
 
     protected List<Predicate> predicates = new ArrayList<>();
-    public boolean isValid(Object obj) {
-        return this.isValid(obj);
-    }
+
+    public abstract boolean isValid(Object obj);
 
 }
