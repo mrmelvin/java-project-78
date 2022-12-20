@@ -11,18 +11,18 @@ public class NumberSchema extends BaseSchema {
     private Integer rangeMaximum = Integer.MAX_VALUE;
 
 
-    public NumberSchema required() {
+    public final NumberSchema required() {
         this.availableChecking = true;
         return this;
     }
 
-    public NumberSchema positive() {
+    public final NumberSchema positive() {
         this.positiveAvailable = true;
         predicates.add(checkPositive);
         return this;
     }
 
-    public NumberSchema range(Integer minimum, Integer maximum) {
+    public final NumberSchema range(Integer minimum, Integer maximum) {
         rangeMinimum = minimum;
         rangeMaximum = maximum;
         predicates.add(checkRange);

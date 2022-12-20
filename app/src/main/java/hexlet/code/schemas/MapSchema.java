@@ -11,18 +11,18 @@ public class MapSchema extends BaseSchema {
     private Integer size = 0;
     private Map<String, BaseSchema> exampleMap = new HashMap<>();
 
-    public MapSchema required() {
+    public final MapSchema required() {
         this.availableChecking = true;
         return this;
     }
 
-    public MapSchema sizeof(Integer mapSize) {
+    public final MapSchema sizeof(Integer mapSize) {
         this.size = mapSize;
         predicates.add(checkSizeOf);
         return this;
     }
 
-    public MapSchema shape(Map<String, BaseSchema> patternMap) {
+    public final MapSchema shape(Map<String, BaseSchema> patternMap) {
         this.availableChecking = true;
         this.exampleMap = patternMap;
         predicates.add(checkShape);
