@@ -38,10 +38,14 @@ public class NumberSchema extends BaseSchema {
         Integer currentNumber;
         if (obj instanceof Integer | Objects.equals(obj, null)) {
             if (this.availableChecking) {
-                currentNumber = (Integer) obj;
-                predicates.add(defaultCheck);
-                for (var predicate : predicates) {
-                    validation &= predicate.test(currentNumber);
+                if (Objects.equals(obj, null)) {
+                    validation = false;
+                } else {
+                    currentNumber = (Integer) obj;
+                    predicates.add(defaultCheck);
+                    for (var predicate : predicates) {
+                        validation &= predicate.test(currentNumber);
+                    }
                 }
             } else if (Objects.equals(obj, null)) {
                 validation = true;
