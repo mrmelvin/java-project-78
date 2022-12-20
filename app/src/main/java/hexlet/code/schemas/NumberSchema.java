@@ -1,13 +1,15 @@
 package hexlet.code.schemas;
 
-public class NumberSchema {
+import java.util.Objects;
+import java.util.function.Predicate;
+
+public class NumberSchema extends BaseSchema {
 
     private boolean availableChecking = false;
-    private boolean validation = false;
-    private boolean isNumberPositive;
-    private Integer currentNumber;
+    private boolean positiveAvailable = false;
     private Integer rangeMinimum = Integer.MIN_VALUE;
     private Integer rangeMaximum = Integer.MAX_VALUE;
+
 
     public NumberSchema required() {
         this.availableChecking = true;
@@ -15,32 +17,41 @@ public class NumberSchema {
     }
 
     public NumberSchema positive() {
-        this.isNumberPositive = true;
+        this.positiveAvailable = true;
+        predicates.add(checkPositive);
         return this;
     }
 
     public NumberSchema range(Integer minimum, Integer maximum) {
-        this.rangeMinimum = minimum;
-        this.rangeMaximum = maximum;
+        rangeMinimum = minimum;
+        rangeMaximum = maximum;
+        predicates.add(checkRange);
         return this;
     }
 
-    public boolean getPositive(Integer number) {
-        return number > 0;
-    }
-
-    public boolean getInRange(Integer min, Integer max, Integer number) {
-        return (number >= min) & (number <= max) ? true : false;
-
-    }
+    Predicate<Integer> checkPositive = i -> i > 0;
+    Predicate<Integer> checkRange = i -> (i >= this.rangeMinimum) & (i <= this.rangeMaximum);
+    Predicate<Integer> defaultCheck = i -> !Objects.equals(i, null);
 
     public boolean isValid(Object obj) {
-        BaseSchema schema = new BaseSchema();
-        if (!this.availableChecking) {
-            validation = true;
-        } else if (obj instanceof Integer) {
-            currentNumber = (Integer) obj;
-            validation = getPositive(currentNumber) & getInRange(this.rangeMinimum, this.rangeMaximum, currentNumber);
+        boolean validation = true;
+        Integer currentNumber;
+        if (obj instanceof Integer | Objects.equals(obj, null)) {
+            if (this.availableChecking) {
+                currentNumber = (Integer) obj;
+                predicates.add(defaultCheck);
+                for (var predicate : predicates) {
+                    validation &= predicate.test(currentNumber);
+                }
+            } else if (Objects.equals(obj, null)) {
+                validation = true;
+            } else {
+                currentNumber = (Integer) obj;
+                predicates.add(defaultCheck);
+                for (var predicate : predicates) {
+                    validation &= predicate.test(currentNumber);
+                }
+            }
         } else {
             validation = false;
         }
