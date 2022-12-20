@@ -3,7 +3,6 @@ package hexlet.code;
 import hexlet.code.schemas.MapSchema;
 import hexlet.code.schemas.NumberSchema;
 import hexlet.code.schemas.StringSchema;
-//import hexlet.code.schemas.StringSchema_;
 
 public class Validator {
 
@@ -22,14 +21,4 @@ public class Validator {
         return new MapSchema();
     }
 
-//    public BaseSchema string() {
-//        return new StringSchema();
-//    }
-//    public BaseSchema number() {
-//        return new NumberSchema();
-//    }
-//
-//    public BaseSchema map() {
-//        return new MapSchema();
-//    }
 }
