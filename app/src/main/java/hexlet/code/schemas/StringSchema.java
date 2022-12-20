@@ -32,13 +32,14 @@ public class StringSchema extends BaseSchema {
     }
 
 
-    Predicate<String> checkContains = s -> s.contains(this.patternString);
-    Predicate<String> checkLength = s -> s.length() >= this.minimumStringLength;
-    Predicate<String> availableCheck = s -> s.length() > 0;
-    Predicate<String> nonAvailableCheck = s -> s.length() > -1;
+    private Predicate<String> checkContains = s -> s.contains(this.patternString);
+    private Predicate<String> checkLength = s -> s.length() >= this.minimumStringLength;
+    private Predicate<String> availableCheck = s -> s.length() > 0;
+    private Predicate<String> nonAvailableCheck = s -> s.length() > -1;
 
 
-    public boolean isValid(Object obj) {
+    @Override
+    public final boolean isValid(Object obj) {
         boolean validation = true;
         String inputString;
         if (obj instanceof String | Objects.equals(obj, null)) {

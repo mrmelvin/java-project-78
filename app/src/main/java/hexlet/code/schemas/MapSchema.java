@@ -29,12 +29,12 @@ public class MapSchema extends BaseSchema {
         return this;
     }
 
-    Predicate<Map> checkSizeOf = map -> map.size() == this.size;
-    Predicate<Map> defaultCheck = map -> !Objects.equals(map, null);
-    Predicate<Map> checkShape = map -> predicattedCheckShape(map);
+    private Predicate<Map> checkSizeOf = map -> map.size() == this.size;
+    private Predicate<Map> defaultCheck = map -> !Objects.equals(map, null);
+    private Predicate<Map> checkShape = map -> predicattedCheckShape(map);
 
 
-    public boolean predicattedCheckShape(Map<String, Object> testingMap) {
+    public final boolean predicattedCheckShape(Map<String, Object> testingMap) {
         for (var elem: testingMap.entrySet()) {
             if (!this.exampleMap.get(elem.getKey()).isValid(elem.getValue())) {
                 return false;
@@ -44,7 +44,8 @@ public class MapSchema extends BaseSchema {
     }
 
 
-    public boolean isValid(Object obj) {
+    @Override
+    public final boolean isValid(Object obj) {
         boolean validation = true;
         Map<String, Object> currentMap = new HashMap<>();
         if (obj instanceof Map | Objects.equals(obj, null)) {

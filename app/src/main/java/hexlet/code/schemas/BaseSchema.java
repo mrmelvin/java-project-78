@@ -6,7 +6,7 @@ import java.util.function.Predicate;
 
 public class BaseSchema {
 
-    public List<Predicate> predicates = new ArrayList<>();
+    protected List<Predicate> predicates = new ArrayList<>();
     public boolean isValid(Object obj) {
         return this.isValid(obj);
     }

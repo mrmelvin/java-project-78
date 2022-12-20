@@ -29,11 +29,12 @@ public class NumberSchema extends BaseSchema {
         return this;
     }
 
-    Predicate<Integer> checkPositive = i -> i > 0;
-    Predicate<Integer> checkRange = i -> (i >= this.rangeMinimum) & (i <= this.rangeMaximum);
-    Predicate<Integer> defaultCheck = i -> !Objects.equals(i, null);
+    private Predicate<Integer> checkPositive = i -> i > 0;
+    private Predicate<Integer> checkRange = i -> (i >= this.rangeMinimum) & (i <= this.rangeMaximum);
+    private Predicate<Integer> defaultCheck = i -> !Objects.equals(i, null);
 
-    public boolean isValid(Object obj) {
+    @Override
+    public final boolean isValid(Object obj) {
         boolean validation = true;
         Integer currentNumber;
         if (obj instanceof Integer | Objects.equals(obj, null)) {
