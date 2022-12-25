@@ -3,11 +3,10 @@ package hexlet.code.schemas;
 import java.util.Objects;
 import java.util.function.Predicate;
 
-public class StringSchema extends BaseSchema implements BasicValidation {
+public class StringSchema extends BaseSchema {
 
 
-    @Override
-    public void defaultCheck() {
+    public final void defaultCheck() {
         Predicate<Object> defaultCheck = obj -> (obj instanceof String | Objects.equals(obj, null));
         predicates.add(defaultCheck);
     }

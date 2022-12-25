@@ -4,10 +4,10 @@ import java.util.Objects;
 import java.util.Map;
 import java.util.function.Predicate;
 
-public class MapSchema extends BaseSchema implements BasicValidation {
+public class MapSchema extends BaseSchema {
 
-    @Override
-    public void defaultCheck() {
+
+    public final void defaultCheck() {
         Predicate<Object> defaultCheck = obj -> (obj instanceof Map<?, ?> | Objects.equals(obj, null));
         predicates.add(defaultCheck);
     }
