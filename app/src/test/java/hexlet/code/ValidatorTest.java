@@ -40,6 +40,7 @@ class ValidatorTest {
         Validator v3 = new Validator();
         NumberSchema schema3 = v3.number();
         assertThat(schema3.isValid(null)).isTrue();
+        assertThat(schema3.isValid(0)).isTrue();
         assertThat(schema3.positive().isValid(-9)).isFalse();
     }
 
