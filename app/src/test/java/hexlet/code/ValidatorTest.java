@@ -17,7 +17,7 @@ class ValidatorTest {
     void testStringWithoutRequired() throws Exception {
         Validator v1 = new Validator();
         StringSchema schema = v1.string();
-        assertThat(schema.isValid(123)).isFalse();
+        assertThat(schema.isValid(123)).isTrue();
         assertThat(schema.isValid(null)).isTrue();
         assertThat(schema.isValid("")).isTrue();
         assertThat(schema.isValid("Qwerty")).isTrue();
@@ -67,7 +67,7 @@ class ValidatorTest {
     void testMapWithoutRequired() throws Exception {
         Validator v6 = new Validator();
         MapSchema schema6 = v6.map();
-        assertThat(schema6.isValid("String")).isFalse();
+        assertThat(schema6.isValid("String")).isTrue();
         assertThat(schema6.isValid(null)).isTrue();
         assertThat(schema6.isValid(new HashMap<>())).isTrue();
         assertThat(schema6.isValid(new HashMap<>(Map.of("foo", "bar")))).isTrue();

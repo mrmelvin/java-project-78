@@ -7,14 +7,9 @@ import java.util.function.Predicate;
 public class MapSchema extends BaseSchema {
 
 
-    public final void defaultCheck() {
-        Predicate<Object> defaultCheck = obj -> (obj instanceof Map<?, ?> | Objects.equals(obj, null));
-        predicates.add(defaultCheck);
-    }
-
     public final MapSchema required() {
         Predicate<Object> checkRequired = someMap -> (!Objects.equals(someMap, null)
-                                                            & someMap instanceof Map<?, ?>);
+                                                            && someMap instanceof Map<?, ?>);
         predicates.add(checkRequired);
         return this;
     }
@@ -34,7 +29,7 @@ public class MapSchema extends BaseSchema {
     }
 
 
-    public final boolean predicattedCheckShape(Map<String, Object> testingMap, Map<String, BaseSchema> patternMap) {
+    private boolean predicattedCheckShape(Map<String, Object> testingMap, Map<String, BaseSchema> patternMap) {
         for (var elem: testingMap.entrySet()) {
             if (!patternMap.get(elem.getKey()).isValid(elem.getValue())) {
                 return false;

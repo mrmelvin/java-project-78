@@ -6,11 +6,6 @@ import java.util.function.Predicate;
 public class NumberSchema extends BaseSchema {
 
 
-    public final void defaultCheck() {
-        Predicate<Object> defaultCheck = obj -> (obj instanceof Integer | Objects.equals(obj, null));
-        predicates.add(defaultCheck);
-    }
-
     public final NumberSchema required() {
         Predicate<Object> checkRequired = i -> !Objects.equals(i, null);
         predicates.add(checkRequired);
