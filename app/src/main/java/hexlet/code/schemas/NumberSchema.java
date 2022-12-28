@@ -22,7 +22,7 @@ public class NumberSchema extends BaseSchema {
 
     public final NumberSchema range(Integer minimum, Integer maximum) {
         Predicate<Object> checkRange = i -> ((i instanceof Integer)
-                                                && (((Integer) i >= minimum) & ((Integer) i <= maximum)));
+                                                && (((Integer) i >= minimum) && ((Integer) i <= maximum)));
         predicates.add(checkRange);
         return this;
     }
